@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Mundo dos Games</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="simple-bg">
+
+  <section class="simple-container">
+    <div class="simple-card">
+      <h2>Login</h2>
+      <p class="simple-sub">Acesse sua conta para continuar.</p>
+      <form class="simple-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="seu@email.com">
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required placeholder="sua senha">
+
+        <a href="index.html" class="btn">Entrar</a>
+        <button type="button" class="btn" style="background:#ff2d55;color:#fff;margin-left:8px;" onclick="window.location.href='esqueci.html'">Esqueceu a senha?</button>
+      </form>
+      <p class="simple-footer">
+        Não tem conta? <a href="cadastro.html">Cadastre-se</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h4>Mundo dos Games</h4>
+        <p>Rua Exemplo, 123 — Cidade — Brasil</p>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <a href="sobre.html">Sobre</a> |
+        <a href="suporte.html">Suporte</a> |
+        <a href="feedback.html">Feedback</a>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <p>email@mundodosgames.com</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© <span id="year"></span> Mundo dos Games — Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

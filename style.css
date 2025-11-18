@@ -1,0 +1,206 @@
+/* Estilo exclusivo para as logos do catálogo na home (index.html) */
+
+.produto-card img {
+	max-width: 100%;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+.produto-card img,
+.catalogo-item img,
+.game-cover {
+	width: 100%;
+	max-width: 200px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 6px;
+	margin-bottom: 12px;
+	display: block;
+}
+/* Estilo moderno e temático para games */
+
+body {
+	margin: 0;
+	font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+	background: linear-gradient(120deg, #232526 0%, #414345 100%);
+	color: #f3f3f3;
+	min-height: 100vh;
+}
+
+a {
+	color: #00ffd0;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+a:hover {
+	color: #ff2d55;
+}
+
+.site-header, .site-footer {
+	background: #18181b;
+	color: #fff;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.site-header .logo {
+	font-size: 2rem;
+	font-weight: bold;
+	color: #00ffd0;
+	letter-spacing: 2px;
+}
+.main-nav a {
+	margin: 0 12px;
+	font-weight: 500;
+	color: #fff;
+	padding: 6px 10px;
+	border-radius: 4px;
+	transition: background 0.2s;
+}
+.main-nav a:hover {
+	background: #00ffd0;
+	color: #18181b;
+}
+.header-actions .icon-link {
+	margin-left: 16px;
+	color: #ff2d55;
+	font-weight: bold;
+}
+
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+.header-inner, .footer-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.simple-bg {
+	background: linear-gradient(120deg, #232526 0%, #414345 100%);
+}
+.simple-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	min-height: 70vh;
+	padding: 40px 0;
+}
+.simple-card {
+	background: #22232b;
+	border-radius: 12px;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+	padding: 32px 28px;
+	max-width: 480px;
+	width: 100%;
+	margin: 0 auto;
+}
+.simple-card h2 {
+	color: #00ffd0;
+	margin-bottom: 8px;
+}
+.simple-sub {
+	color: #b2b2b2;
+	margin-bottom: 24px;
+}
+.btn {
+	display: inline-block;
+	background: linear-gradient(90deg, #00ffd0 0%, #ff2d55 100%);
+	color: #18181b;
+	font-weight: bold;
+	border: none;
+	border-radius: 6px;
+	padding: 10px 24px;
+	margin: 12px 0;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: box-shadow 0.2s, background 0.2s;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.btn:hover {
+	background: linear-gradient(90deg, #ff2d55 0%, #00ffd0 100%);
+	color: #fff;
+}
+
+.simple-form label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 500;
+	color: #00ffd0;
+}
+.simple-form input,
+.simple-form select,
+.simple-form textarea {
+	width: 100%;
+	padding: 8px 10px;
+	margin-bottom: 16px;
+	border-radius: 5px;
+	border: 1px solid #333;
+	background: #18181b;
+	color: #f3f3f3;
+	font-size: 1rem;
+	transition: border 0.2s;
+}
+.simple-form input:focus,
+.simple-form select:focus,
+.simple-form textarea:focus {
+	border-color: #00ffd0;
+	outline: none;
+}
+
+.cart-item {
+	display: flex;
+	align-items: center;
+	background: #292a33;
+	border-radius: 8px;
+	margin-bottom: 14px;
+	padding: 10px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+.cart-item img {
+	border-radius: 8px;
+	margin-right: 16px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.cart-item h3 {
+	margin: 0 0 4px 0;
+	color: #00ffd0;
+}
+.cart-summary {
+	background: #292a33;
+	border-radius: 8px;
+	padding: 14px;
+	margin: 18px 0;
+	color: #fff;
+	font-size: 1.1rem;
+}
+
+.copyright {
+	text-align: center;
+	color: #b2b2b2;
+	font-size: 0.95rem;
+	margin-top: 18px;
+}
+
+ul {
+	padding-left: 18px;
+}
+li {
+	margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+	.simple-card {
+		padding: 18px 8px;
+		max-width: 98vw;
+	}
+	.container {
+		padding: 0 6px;
+	}
+	.header-inner, .footer-inner {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}

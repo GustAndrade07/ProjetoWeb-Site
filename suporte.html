@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Suporte — Mundo dos Games</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body class="simple-bg">
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="logo" href="index.html">🎮 Mundo dos Games</a>
+			<nav class="main-nav">
+				<a href="index.html">Home</a>
+				<a href="playstation.html">PlayStation</a>
+				<a href="xbox.html">Xbox</a>
+				<a href="nintendo.html">Nintendo</a>
+				<a href="pc.html">PC</a>
+				<a href="sobre.html">Sobre</a>
+				<a href="suporte.html">Suporte</a>
+			</nav>
+			<div class="header-actions">
+				<a class="icon-link" href="perfil.html">Perfil</a>
+				<a class="icon-link" href="login.html">Login</a>
+				<a class="icon-link" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+			</div>
+		</div>
+	</header>
+
+	<section class="simple-container">
+		<div class="simple-card">
+			<h2>Suporte ao Cliente</h2>
+			<p class="simple-sub">Precisa de ajuda? Fale com nossa equipe!</p>
+			<form class="simple-form" id="suporte-form">
+				<label for="nome">Nome:</label>
+				<input type="text" id="nome" name="nome" required />
+
+				<label for="email">E-mail:</label>
+				<input type="email" id="email" name="email" required />
+
+				<label for="assunto">Assunto:</label>
+				<input type="text" id="assunto" name="assunto" required />
+
+				<label for="mensagem">Mensagem:</label>
+				<textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+
+				<button type="submit" class="btn">Enviar</button>
+			</form>
+			<div id="suporte-feedback" style="display:none; margin-top:16px;"></div>
+			<h3>Outros canais de atendimento</h3>
+			<ul>
+				<li>E-mail: <strong>suporte@mundodosgames.com</strong></li>
+				<li>Telefone: <strong>(11) 4002-8922</strong></li>
+				<li>WhatsApp: <strong>(11) 98888-7777</strong></li>
+				<li>Horário: Segunda a Sexta, das 9h às 18h</li>
+			</ul>
+		</div>
+	</section>
+
+	<footer class="site-footer">
+		<div class="container footer-inner">
+			<div>
+				<h4>Mundo dos Games</h4>
+				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
+			</div>
+			<div>
+				<h4>Links</h4>
+				<a href="sobre.html">Sobre</a> |
+				<a href="suporte.html">Suporte</a> |
+				<a href="feedback.html">Feedback</a>
+			</div>
+			<div>
+				<h4>Contato</h4>
+				<p>email@mundodosgames.com</p>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>© <span id="year"></span> Mundo dos Games — Todos os direitos reservados.</p>
+		</div>
+	</footer>
+	<script src="script.js"></script>
+</body>
+</html>

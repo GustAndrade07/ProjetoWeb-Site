@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Mundo dos Games — Pagamento</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body class="simple-bg">
+
+	<!-- Header -->
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="logo" href="index.html">🎮 Mundo dos Games</a>
+			<nav class="main-nav">
+				<a href="index.html">Home</a>
+				<a href="playstation.html">PlayStation</a>
+				<a href="xbox.html">Xbox</a>
+				<a href="nintendo.html">Nintendo</a>
+				<a href="pc.html">PC</a>
+				<a href="sobre.html">Sobre</a>
+				<a href="suporte.html">Suporte</a>
+			</nav>
+			<div class="header-actions">
+				<a class="icon-link" href="perfil.html">Perfil</a>
+				<a class="icon-link" href="login.html">Login</a>
+				<a class="icon-link" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+			</div>
+		</div>
+	</header>
+
+	<!-- Pagamento -->
+	<section class="simple-container">
+		<div class="simple-card">
+			<h2>Pagamento</h2>
+			<p class="simple-sub">Selecione a forma de pagamento e finalize sua compra.</p>
+			<form id="form-pagamento" class="simple-form">
+					<h3>Endereço de Entrega</h3>
+					<label for="endereco">Endereço Completo</label>
+					<input type="text" id="endereco" name="endereco" required placeholder="Rua, número, bairro, cidade, estado">
+					<label for="cep">CEP</label>
+					<input type="text" id="cep" name="cep" required placeholder="00000-000">
+				<label for="forma-pagamento">Forma de Pagamento</label>
+				<select id="forma-pagamento" name="forma-pagamento" required>
+					<option value="pix">PIX</option>
+					<option value="cartao">Cartão de Crédito</option>
+					<option value="boleto">Boleto Bancário</option>
+				</select>
+
+				<div id="dados-cartao" style="display:none;">
+					<label for="numero-cartao">Número do Cartão</label>
+					<input type="text" id="numero-cartao" name="numero-cartao" maxlength="19" placeholder="0000 0000 0000 0000">
+
+					<label for="nome-cartao">Nome no Cartão</label>
+					<input type="text" id="nome-cartao" name="nome-cartao" placeholder="Como está no cartão">
+
+					<label for="validade-cartao">Validade</label>
+					<input type="text" id="validade-cartao" name="validade-cartao" maxlength="5" placeholder="MM/AA">
+
+					<label for="cvv-cartao">CVV</label>
+					<input type="text" id="cvv-cartao" name="cvv-cartao" maxlength="4" placeholder="CVV">
+				</div>
+
+				<div id="info-pix" style="display:none;">
+					<p>Chave PIX: <strong>email@mundodosgames.com</strong></p>
+				</div>
+
+				<div id="info-boleto" style="display:none;">
+					<p>O boleto será gerado após a finalização do pedido.</p>
+				</div>
+
+				<div class="cart-summary">
+					  <p>Frete: <span id="frete">R$ 10,00</span></p>
+					  <p>Total da compra: <span id="cart-total">R$ 0,00</span></p>
+				</div>
+
+				<a href="confirmar.html" class="btn">Confirmar Pagamento</a>
+				<button type="submit" class="btn">Confirmar Pagamento</button>
+			</form>
+			<p class="simple-footer">
+				<a href="checkout.html">Voltar ao checkout</a>
+			</p>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="site-footer">
+		<div class="container footer-inner">
+			<div>
+				<h4>Mundo dos Games</h4>
+				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
+			</div>
+			<div>
+				<h4>Links</h4>
+				<a href="sobre.html">Sobre</a> |
+				<a href="suporte.html">Suporte</a> |
+				<a href="feedback.html">Feedback</a>
+			</div>
+			<div>
+				<h4>Contato</h4>
+				<p>email@mundodosgames.com</p>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>© <span id="year"></span> Mundo dos Games — Todos os direitos reservados.</p>
+		</div>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
