@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Mundo dos Games — Cadastro</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body class="simple-bg">
+
+	<!-- Cadastro -->
+	<section class="simple-container">
+		<div class="simple-card">
+			<h2>Criar Conta</h2>
+			<p class="simple-sub">Preencha os dados para se cadastrar.</p>
+			<form class="simple-form">
+				<label for="nome">Nome Completo</label>
+				<input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+
+				<label for="email">Email</label>
+				<input type="email" id="email" name="email" required placeholder="seu@email.com">
+
+				<label for="senha">Senha</label>
+				<input type="password" id="senha" name="senha" required placeholder="Crie uma senha">
+
+				<label for="confirmar-senha">Confirmar Senha</label>
+				<input type="password" id="confirmar-senha" name="confirmar-senha" required placeholder="Repita a senha">
+
+				<a href="login.html" class="btn">Cadastrar</a>
+			</form>
+			<p class="simple-footer">
+				Já tem conta? <a href="login.html">Entrar</a>
+			</p>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="site-footer">
+		<div class="container footer-inner">
+			<div>
+				<h4>Mundo dos Games</h4>
+				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
+			</div>
+			<div>
+				<h4>Links</h4>
+				<a href="sobre.html">Sobre</a> |
+				<a href="suporte.html">Suporte</a> |
+				<a href="feedback.html">Feedback</a>
+			</div>
+			<div>
+				<h4>Contato</h4>
+				<p>email@mundodosgames.com</p>
+			</div>
+		</div>
+		<div class="copyright">
+			<p>© <span id="year"></span> Mundo dos Games — Todos os direitos reservados.</p>
+		</div>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
