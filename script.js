@@ -283,8 +283,3 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 });
-
-// Exemplo de uso:
-// salvarUsuario('Nome', 'email@exemplo.com', 'senha123');
-// const usuario = autenticarUsuario('email@exemplo.com', 'senha123');
-// if (usuario) { /* login ok */ } else { /* login falhou */ }
