@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Sobre — Mundo dos Games</title>
@@ -8,23 +9,30 @@
 </head>
 <body class="simple-bg">
 	<header class="site-header">
-		<div class="container header-inner">
-			<a class="logo" href="index.html">🎮 Mundo dos Games</a>
-			<nav class="main-nav">
-				<a href="index.html">Home</a>
-				<a href="playstation.html">PlayStation</a>
-				<a href="xbox.html">Xbox</a>
-				<a href="nintendo.html">Nintendo</a>
-				<a href="pc.html">PC</a>
-				<a href="sobre.html">Sobre</a>
-				<a href="suporte.html">Suporte</a>
-			</nav>
-			<div class="header-actions">
-				<a class="icon-link" href="perfil.html">Perfil</a>
-				<a class="icon-link" href="login.html">Login</a>
-				<a class="icon-link" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand logo" href="index.html">🎮 Mundo dos Games</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="playstation.html">PlayStation</a></li>
+						<li class="nav-item"><a class="nav-link" href="xbox.html">Xbox</a></li>
+						<li class="nav-item"><a class="nav-link" href="nintendo.html">Nintendo</a></li>
+						<li class="nav-item"><a class="nav-link" href="pc.html">PC</a></li>
+						<li class="nav-item"><a class="nav-link active" aria-current="page" href="sobre.html">Sobre</a></li>
+						<li class="nav-item"><a class="nav-link" href="suporte.html">Suporte</a></li>
+					</ul>
+					<div class="d-flex gap-2">
+						<a class="btn btn-outline-info" href="perfil.html">Perfil</a>
+						<a class="btn btn-outline-light" href="login.html">Login</a>
+						<a class="btn btn-primary" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+					</div>
+				</div>
 			</div>
-		</div>
+		</nav>
 	</header>
 
 	<section class="simple-container">
@@ -61,7 +69,7 @@
 		<div class="container footer-inner">
 			<div>
 				<h4>Mundo dos Games</h4>
-				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
+				<p>Rua dos Games, 123 — Cidade — Brasil</p>
 			</div>
 			<div>
 				<h4>Links</h4>
@@ -78,6 +86,7 @@
 			<p>© <span id="year"></span> Mundo dos Games — Todos os direitos reservados.</p>
 		</div>
 	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="script.js"></script>
 </body>
 </html>

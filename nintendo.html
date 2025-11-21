@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Mundo dos Games — Nintendo</title>
@@ -11,63 +12,82 @@
 
 	<!-- Header -->
 	<header class="site-header">
-		<div class="container header-inner">
-			<a class="logo" href="index.html">🎮 Mundo dos Games</a>
-			<nav class="main-nav">
-				<a href="index.html">Home</a>
-				<a href="playstation.html">PlayStation</a>
-				<a href="xbox.html">Xbox</a>
-				<a href="nintendo.html" class="active">Nintendo</a>
-				<a href="pc.html">PC</a>
-				<a href="sobre.html">Sobre</a>
-				<a href="suporte.html">Suporte</a>
-			</nav>
-			<div class="header-actions">
-				<a class="icon-link" href="perfil.html">Perfil</a>
-				<a class="icon-link" href="login.html">Login</a>
-				<a class="icon-link" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand logo" href="index.html">🎮 Mundo dos Games</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="playstation.html">PlayStation</a></li>
+						<li class="nav-item"><a class="nav-link" href="xbox.html">Xbox</a></li>
+						<li class="nav-item"><a class="nav-link active" aria-current="page" href="nintendo.html">Nintendo</a></li>
+						<li class="nav-item"><a class="nav-link" href="pc.html">PC</a></li>
+						<li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+						<li class="nav-item"><a class="nav-link" href="suporte.html">Suporte</a></li>
+					</ul>
+					<div class="d-flex gap-2">
+						<a class="btn btn-outline-info" href="perfil.html">Perfil</a>
+						<a class="btn btn-outline-light" href="login.html">Login</a>
+						<a class="btn btn-primary" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+					</div>
+				</div>
 			</div>
-		</div>
+		</nav>
 	</header>
 
 	<!-- Catálogo Nintendo -->
-	<section class="simple-container">
-		<div class="simple-card">
-			<h2>Jogos para Nintendo</h2>
-			<p class="simple-sub">Confira os principais títulos disponíveis para Nintendo Switch!</p>
-			<div class="catalogo-grid">
-				<div class="catalogo-item">
-					<h3>Super Mario Odyssey</h3>
-					<img src="https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2017/10/26/c12d0d43-4943-4cd3-ab1b-3cf654452046/super-mario-odyssey-5-secrets" alt="Super Mario Odyssey" class="game-cover">
-					<p>Aventura/Plataforma</p>
-					<span class="preco">R$ 199,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
-				</div>
-				<div class="catalogo-item">
-					<h3>The Legend of Zelda: Breath of the Wild</h3>
-					<img src="https://upload.wikimedia.org/wikipedia/pt/0/0f/Legend_of_Zelda_Breath_of_the_Wild_capa.png" alt="Zelda Breath of the Wild" class="game-cover">
-					<p>Ação/Aventura</p>
-					<span class="preco">R$ 229,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
-				</div>
-				<div class="catalogo-item">
-					<h3>Mario Kart 8 Deluxe</h3>
-					<img src="https://images-cdn.ubuy.ae/64c5bb4b16403646d76fb1b1-mario-kart-8-deluxe-booster-course.jpg" alt="Mario Kart 8 Deluxe" class="game-cover">
-					<p>Corrida</p>
-					<span class="preco">R$ 179,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
-				</div>
-				<div class="catalogo-item">
-					<h3>Pokémon Sword</h3>
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTajNRBBolOaLQ1yHAemA3F7BwSFYvybYPIuQ&s" alt="Pokémon Sword" class="game-cover">
-					<p>RPG</p>
-					<span class="preco">R$ 189,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
+	<section class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-10">
+				<div class="card shadow-lg rounded-4 p-4 bg-dark text-light">
+					<h2 class="mb-3 text-center">Jogos para Nintendo</h2>
+					<p class="mb-4 text-center text-secondary">Confira os principais títulos disponíveis para Nintendo Switch!</p>
+					<div class="row g-4">
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>Super Mario Odyssey</h3>
+								<img src="https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2017/10/26/c12d0d43-4943-4cd3-ab1b-3cf654452046/super-mario-odyssey-5-secrets" alt="Super Mario Odyssey" class="game-cover mb-2">
+								<p>Aventura/Plataforma</p>
+								<span class="preco">R$ 199,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>The Legend of Zelda: Breath of the Wild</h3>
+								<img src="https://upload.wikimedia.org/wikipedia/pt/0/0f/Legend_of_Zelda_Breath_of_the_Wild_capa.png" alt="Zelda Breath of the Wild" class="game-cover mb-2">
+								<p>Ação/Aventura</p>
+								<span class="preco">R$ 229,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>Mario Kart 8 Deluxe</h3>
+								<img src="https://images-cdn.ubuy.ae/64c5bb4b16403646d76fb1b1-mario-kart-8-deluxe-booster-course.jpg" alt="Mario Kart 8 Deluxe" class="game-cover mb-2">
+								<p>Corrida</p>
+								<span class="preco">R$ 179,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>Pokémon Sword</h3>
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTajNRBBolOaLQ1yHAemA3F7BwSFYvybYPIuQ&s" alt="Pokémon Sword" class="game-cover mb-2">
+								<p>RPG</p>
+								<span class="preco">R$ 189,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+					</div>
+					<p class="mt-4 text-center">
+						<a href="index.html" class="link-info">Voltar para Home</a>
+					</p>
 				</div>
 			</div>
-			<p class="simple-footer">
-				<a href="index.html">Voltar para Home</a>
-			</p>
 		</div>
 	</section>
 
@@ -76,7 +96,7 @@
 		<div class="container footer-inner">
 			<div>
 				<h4>Mundo dos Games</h4>
-				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
+				<p>Rua dos Games, 123 — Cidade — Brasil</p>
 			</div>
 			<div>
 				<h4>Links</h4>
@@ -94,6 +114,7 @@
 		</div>
 	</footer>
 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="script.js"></script>
 </body>
 </html>

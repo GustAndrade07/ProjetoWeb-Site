@@ -1,7 +1,9 @@
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6VKHr8zWvZg9lZlY9z0Zl5Fv5K6U6Q6Q6Q6Q6Q6Q6Q6Q" crossorigin="anonymous"></script>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Mundo dos Games — Cadastro</title>
@@ -21,13 +23,22 @@
 				<label for="email">Email</label>
 				<input type="email" id="email" name="email" required placeholder="seu@email.com">
 
+				<label for="cep">CEP</label>
+				<input type="text" id="cep" name="cep" required placeholder="00000-000">
+
+				<label for="endereco">Endereço</label>
+				<input type="text" id="endereco" name="endereco" required placeholder="Rua, bairro, cidade - UF">
+
+				<label for="telefone">Telefone</label>
+				<input type="text" id="telefone" name="telefone" required placeholder="Seu telefone">
+
 				<label for="senha">Senha</label>
 				<input type="password" id="senha" name="senha" required placeholder="Crie uma senha">
 
 				<label for="confirmar-senha">Confirmar Senha</label>
 				<input type="password" id="confirmar-senha" name="confirmar-senha" required placeholder="Repita a senha">
 
-				<a href="login.html" class="btn">Cadastrar</a>
+				<button type="submit" class="btn">Cadastrar</button>
 			</form>
 			<p class="simple-footer">
 				Já tem conta? <a href="login.html">Entrar</a>
@@ -35,29 +46,8 @@
 		</div>
 	</section>
 
-	<!-- Footer -->
-	<footer class="site-footer">
-		<div class="container footer-inner">
-			<div>
-				<h4>Mundo dos Games</h4>
-				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
-			</div>
-			<div>
-				<h4>Links</h4>
-				<a href="sobre.html">Sobre</a> |
-				<a href="suporte.html">Suporte</a> |
-				<a href="feedback.html">Feedback</a>
-			</div>
-			<div>
-				<h4>Contato</h4>
-				<p>email@mundodosgames.com</p>
-			</div>
-		</div>
-		<div class="copyright">
-			<p>© <span id="year"></span> Mundo dos Games — Todos os direitos reservados.</p>
-		</div>
-	</footer>
-
-	<script src="script.js"></script>
+</script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6VKHr8zWvZg9lZlY9z0Zl5Fv5K6U6Q6Q6Q6Q6Q6Q6Q6Q" crossorigin="anonymous"></script>
+<script src="script.js"></script>
 </html>

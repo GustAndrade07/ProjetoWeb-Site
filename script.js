@@ -1,183 +1,290 @@
-// ===============================
-// UTILIDADES
-// ===============================
-
-// Atualizar ano do rodapé
-document.addEventListener("DOMContentLoaded", () => {
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+// Cadastro.html: lógica de cadastro de usuário
+if (window.location.pathname.includes('cadastro.html')) {
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.querySelector('.simple-form');
+		if (form) {
+			form.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const nome = document.getElementById('nome').value.trim();
+				const email = document.getElementById('email').value.trim();
+				const cep = document.getElementById('cep').value.trim();
+				const endereco = document.getElementById('endereco').value.trim();
+				const telefone = document.getElementById('telefone').value.trim();
+				const senha = document.getElementById('senha').value;
+				const confirmar = document.getElementById('confirmar-senha').value;
+				if (!nome || !email || !cep || !endereco || !telefone || !senha || !confirmar) {
+					alert('Preencha todos os campos!');
+					return;
+				}
+				if (senha !== confirmar) {
+					alert('As senhas não coincidem!');
+					return;
+				}
+				let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+				if (usuarios.find(u => u.email === email)) {
+					alert('Este email já está cadastrado!');
+					return;
+				}
+				usuarios.push({ nome, email, cep, endereco, telefone, senha });
+				localStorage.setItem('usuarios', JSON.stringify(usuarios));
+				alert('Cadastro realizado com sucesso!');
+				window.location.href = 'login.html';
+			});
+		}
+	});
+}
+// Responsividade simples: menu mobile
+// API de CEP (ViaCEP) no cadastro e pagamento
+document.addEventListener('DOMContentLoaded', function() {
+	// Cadastro: busca endereço pelo CEP
+	if (window.location.pathname.includes('cadastro.html')) {
+		const cepInput = document.getElementById('cep');
+		const enderecoInput = document.getElementById('endereco');
+		if (cepInput && enderecoInput) {
+			cepInput.addEventListener('blur', function() {
+				const cep = cepInput.value.replace(/\D/g, '');
+				if (cep.length === 8) {
+					fetch(`https://viacep.com.br/ws/${cep}/json/`)
+						.then(res => res.json())
+						.then(data => {
+							if (!data.erro) {
+								enderecoInput.value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+							}
+						});
+				}
+			});
+		}
+	}
+	// Pagamento: busca endereço pelo CEP
+	if (window.location.pathname.includes('pagamento.html')) {
+		const cepInput = document.getElementById('cep');
+		const enderecoInput = document.getElementById('endereco');
+		if (cepInput && enderecoInput) {
+			cepInput.addEventListener('blur', function() {
+				const cep = cepInput.value.replace(/\D/g, '');
+				if (cep.length === 8) {
+					fetch(`https://viacep.com.br/ws/${cep}/json/`)
+						.then(res => res.json())
+						.then(data => {
+							if (!data.erro) {
+								enderecoInput.value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+							}
+						});
+				}
+			});
+		}
+	}
 });
 
-// Carregar carrinho do LocalStorage
-function loadCart() {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
+// LocalStorage para cadastro/login de usuário
+function salvarUsuario(nome, email, senha) {
+	let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+	usuarios.push({ nome, email, senha });
+	localStorage.setItem('usuarios', JSON.stringify(usuarios));
 }
 
-// Salvar carrinho
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
+function autenticarUsuario(email, senha) {
+	let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+	return usuarios.find(u => u.email === email && u.senha === senha);
 }
 
-// Atualizar número do carrinho no header
-function updateCartCount() {
-  const el = document.getElementById("cart-count");
-  if (!el) return;
-  const cart = loadCart();
-  el.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+// Torna função disponível globalmente para login.html
+window.autenticarUsuario = autenticarUsuario;
+// Utilidade: retorna usuário logado
+function getUsuarioLogado() {
+	return JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
 }
-updateCartCount();
 
-// ===============================
-// ADICIONAR AO CARRINHO
-// ===============================
+// Atualiza contador do carrinho em todas as páginas
+function atualizarContadorCarrinho() {
+	const cartCount = document.getElementById('cart-count');
+	if (cartCount) {
+		const usuario = getUsuarioLogado();
+		let carrinho = [];
+		if (usuario && usuario.email) {
+			carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+		}
+		cartCount.textContent = carrinho.length;
+	}
+}
+document.addEventListener('DOMContentLoaded', atualizarContadorCarrinho);
 
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("add-cart")) {
-    const card = e.target.closest(".product-card");
-    const id = card.dataset.id;
-    const title = card.querySelector("h3").textContent;
-    const price = parseFloat(
-      card.querySelector(".price").textContent.replace("R$", "").replace(",", ".")
-    );
-    const img = card.querySelector("img").src;
+// Carrinho.html: exibe itens do carrinho
+if (document.getElementById('cart-items')) {
+	const usuario = getUsuarioLogado();
+	let carrinho = [];
+	if (usuario && usuario.email) {
+		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	}
+	const cartItems = document.getElementById('cart-items');
+	function renderCarrinho() {
+		cartItems.innerHTML = '';
+		let total = 0;
+		if (carrinho.length === 0) {
+			cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+		} else {
+			carrinho.forEach((item, idx) => {
+				const div = document.createElement('div');
+				div.className = 'cart-item';
+				div.innerHTML = `
+					<strong>${item.nome}</strong>
+					<span>R$ ${item.preco.toFixed(2)}</span>
+					<button class="cart-btn" data-idx="${idx}" data-action="dec">-</button>
+					<input type="number" min="1" class="cart-qtd" value="${item.qtd || 1}" data-idx="${idx}">
+					<button class="cart-btn" data-idx="${idx}" data-action="inc">+</button>
+					<button class="cart-remove" data-idx="${idx}">Remover</button>
+				`;
+				cartItems.appendChild(div);
+				total += item.preco * (item.qtd || 1);
+			});
+		}
+		document.getElementById('cart-total').textContent = total.toFixed(2);
+		atualizarContadorCarrinho();
+	}
+	renderCarrinho();
+	cartItems.addEventListener('click', function(e) {
+		const idx = parseInt(e.target.getAttribute('data-idx'));
+		if (e.target.classList.contains('cart-remove')) {
+			carrinho.splice(idx, 1);
+			if (usuario && usuario.email) {
+				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
+			}
+			renderCarrinho();
+		}
+		if (e.target.classList.contains('cart-btn')) {
+			let qtd = carrinho[idx].qtd || 1;
+			if (e.target.getAttribute('data-action') === 'inc') qtd++;
+			if (e.target.getAttribute('data-action') === 'dec' && qtd > 1) qtd--;
+			carrinho[idx].qtd = qtd;
+			if (usuario && usuario.email) {
+				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
+			}
+			renderCarrinho();
+		}
+	});
+	cartItems.addEventListener('change', function(e) {
+		if (e.target.classList.contains('cart-qtd')) {
+			const idx = parseInt(e.target.getAttribute('data-idx'));
+			let qtd = parseInt(e.target.value);
+			if (isNaN(qtd) || qtd < 1) qtd = 1;
+			carrinho[idx].qtd = qtd;
+			if (usuario && usuario.email) {
+				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
+			}
+			renderCarrinho();
+		}
+	});
+}
 
-    let cart = loadCart();
-    const existing = cart.find((p) => p.id === id);
+// Checkout.html: exibe resumo do pedido e endereço do usuário
+if (document.getElementById('checkout-items')) {
+	const usuario = getUsuarioLogado();
+	let carrinho = [];
+	if (usuario && usuario.email) {
+		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	}
+	const checkoutItems = document.getElementById('checkout-items');
+	let subtotal = 0;
+	carrinho.forEach(item => {
+		const div = document.createElement('div');
+		div.className = 'checkout-item';
+		div.innerHTML = `<strong>${item.nome}</strong> — R$ ${item.preco.toFixed(2)} x ${item.qtd || 1}`;
+		checkoutItems.appendChild(div);
+		subtotal += item.preco * (item.qtd || 1);
+	});
+	document.getElementById('checkout-subtotal').textContent = subtotal.toFixed(2);
+	document.getElementById('checkout-total').textContent = subtotal.toFixed(2);
+	if (usuario) {
+		document.getElementById('checkout-endereco').innerHTML = `<strong>Endereço:</strong> ${usuario.endereco || ''}<br><strong>Telefone:</strong> ${usuario.telefone || ''}`;
+	}
+}
 
-    if (existing) {
-      existing.qty++;
-    } else {
-      cart.push({ id, title, price, img, qty: 1 });
-    }
+// Confirmar.html: exibe itens do carrinho e total
+if (document.getElementById('confirm-items')) {
+	const usuario = getUsuarioLogado();
+	let carrinho = [];
+	if (usuario && usuario.email) {
+		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	}
+	const confirmItems = document.getElementById('confirm-items');
+	let total = 0;
+	carrinho.forEach(item => {
+		const div = document.createElement('div');
+		div.className = 'confirm-item';
+		div.innerHTML = `<strong>${item.nome}</strong> — R$ ${item.preco.toFixed(2)} x ${item.qtd || 1}`;
+		confirmItems.appendChild(div);
+		total += item.preco * (item.qtd || 1);
+	});
+	document.getElementById('confirm-total').textContent = total.toFixed(2);
+}
 
-    saveCart(cart);
-    alert("Produto adicionado ao carrinho!");
-  }
+// Pagamento.html: preenche endereço do usuário logado
+if (document.getElementById('endereco')) {
+	const usuario = getUsuarioLogado();
+	if (usuario && usuario.endereco) {
+		document.getElementById('endereco').value = usuario.endereco;
+	}
+	// Atualiza o total do carrinho do usuário logado
+	let carrinho = [];
+	if (usuario && usuario.email) {
+		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	}
+	let total = 0;
+	carrinho.forEach(item => {
+		total += item.preco * (item.qtd || 1);
+	});
+	if (document.getElementById('cart-total')) {
+		document.getElementById('cart-total').textContent = 'R$ ' + total.toFixed(2);
+	}
+}
+
+// Feedback.html: preenche nome/email se logado
+if (document.getElementById('feedback-form')) {
+	const usuario = getUsuarioLogado();
+	if (usuario) {
+		document.getElementById('nome').value = usuario.nome || '';
+		document.getElementById('email').value = usuario.email || '';
+	}
+}
+
+// Suporte.html: preenche nome/email se logado
+if (document.getElementById('suporte-form')) {
+	const usuario = getUsuarioLogado();
+	if (usuario) {
+		document.getElementById('nome').value = usuario.nome || '';
+		document.getElementById('email').value = usuario.email || '';
+	}
+}
+
+// Adicionar ao carrinho nos catálogos
+document.addEventListener('DOMContentLoaded', function() {
+	document.querySelectorAll('.catalogo-item .btn').forEach(btn => {
+		btn.addEventListener('click', function() {
+			const item = this.closest('.catalogo-item');
+			const nome = item.querySelector('h3').textContent;
+			const preco = parseFloat(item.querySelector('.preco').textContent.replace('R$', '').replace(',', '.'));
+			const usuario = getUsuarioLogado();
+			let carrinho = [];
+			if (usuario && usuario.email) {
+				carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+			}
+			// Se já existe, aumenta qtd
+			const idx = carrinho.findIndex(i => i.nome === nome && i.preco === preco);
+			if (idx >= 0) {
+				carrinho[idx].qtd = (carrinho[idx].qtd || 1) + 1;
+			} else {
+				carrinho.push({ nome, preco, qtd: 1 });
+			}
+			if (usuario && usuario.email) {
+				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
+			}
+			atualizarContadorCarrinho();
+			alert('Produto adicionado ao carrinho!');
+		});
+	});
 });
 
-// ===============================
-// PÁGINA: CARRINHO
-// ===============================
-
-function renderCartPage() {
-  const container = document.getElementById("cart-items");
-  if (!container) return; // Só executa se estiver na página de carrinho
-
-  const cart = loadCart();
-  container.innerHTML = "";
-
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Seu carrinho está vazio.</p>";
-    document.getElementById("cart-total").textContent = "0,00";
-    return;
-  }
-
-  cart.forEach((item) => {
-    const div = document.createElement("div");
-    div.className = "cart-item";
-    div.innerHTML = `
-      <img src="${item.img}">
-      <div>
-        <h3>${item.title}</h3>
-        <p>R$ ${item.price.toFixed(2)}</p>
-        <p>Quantidade: ${item.qty}</p>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  document.getElementById("cart-total").textContent = total.toFixed(2);
-}
-renderCartPage();
-
-// ===============================
-// NEWSLETTER
-// ===============================
-
-const newsForm = document.getElementById("newsletter-form");
-if (newsForm) {
-  newsForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("newsletter-email").value;
-    alert("Obrigado! Promoções serão enviadas para: " + email);
-    newsForm.reset();
-  });
-}
-
-// ===============================
-// LOGIN
-// ===============================
-
-const loginForm = document.getElementById("form-login");
-if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Login realizado com sucesso!");
-    window.location.href = "index.html";
-  });
-}
-
-// ===============================
-// CADASTRO
-// ===============================
-
-const cadastroForm = document.getElementById("form-cadastro");
-if (cadastroForm) {
-  cadastroForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Cadastro realizado com sucesso!");
-    window.location.href = "login.html";
-  });
-}
-
-// ===============================
-// CONFIRMAR COMPRA
-// ===============================
-
-const btnConfirmar = document.getElementById("confirmar-compra");
-if (btnConfirmar) {
-  btnConfirmar.addEventListener("click", () => {
-    window.location.href = "checkout.html";
-  });
-}
-
-// ===============================
-// CHECKOUT
-// ===============================
-
-const formCheckout = document.getElementById("form-checkout");
-if (formCheckout) {
-  formCheckout.addEventListener("submit", (e) => {
-    e.preventDefault();
-    window.location.href = "pagamento.html";
-  });
-}
-
-// ===============================
-// PAGAMENTO
-// ===============================
-
-const formPagamento = document.getElementById("form-pagamento");
-if (formPagamento) {
-  formPagamento.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Pagamento aprovado!");
-    localStorage.removeItem("cart");
-    window.location.href = "feedback.html";
-  });
-}
-
-// ===============================
-// FEEDBACK
-// ===============================
-
-const formFeedback = document.getElementById("form-feedback");
-if (formFeedback) {
-  formFeedback.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Obrigado pelo seu feedback!");
-    window.location.href = "index.html";
-  });
-}
+// Exemplo de uso:
+// salvarUsuario('Nome', 'email@exemplo.com', 'senha123');
+// const usuario = autenticarUsuario('email@exemplo.com', 'senha123');
+// if (usuario) { /* login ok */ } else { /* login falhou */ }

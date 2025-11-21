@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Mundo dos Games — PC</title>
@@ -11,63 +12,82 @@
 
 	<!-- Header -->
 	<header class="site-header">
-		<div class="container header-inner">
-			<a class="logo" href="index.html">🎮 Mundo dos Games</a>
-			<nav class="main-nav">
-				<a href="index.html">Home</a>
-				<a href="playstation.html">PlayStation</a>
-				<a href="xbox.html">Xbox</a>
-				<a href="nintendo.html">Nintendo</a>
-				<a href="pc.html" class="active">PC</a>
-				<a href="sobre.html">Sobre</a>
-				<a href="suporte.html">Suporte</a>
-			</nav>
-			<div class="header-actions">
-				<a class="icon-link" href="perfil.html">Perfil</a>
-				<a class="icon-link" href="login.html">Login</a>
-				<a class="icon-link" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand logo" href="index.html">🎮 Mundo dos Games</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="playstation.html">PlayStation</a></li>
+						<li class="nav-item"><a class="nav-link" href="xbox.html">Xbox</a></li>
+						<li class="nav-item"><a class="nav-link" href="nintendo.html">Nintendo</a></li>
+						<li class="nav-item"><a class="nav-link active" aria-current="page" href="pc.html">PC</a></li>
+						<li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+						<li class="nav-item"><a class="nav-link" href="suporte.html">Suporte</a></li>
+					</ul>
+					<div class="d-flex gap-2">
+						<a class="btn btn-outline-info" href="perfil.html">Perfil</a>
+						<a class="btn btn-outline-light" href="login.html">Login</a>
+						<a class="btn btn-primary" href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+					</div>
+				</div>
 			</div>
-		</div>
+		</nav>
 	</header>
 
 	<!-- Catálogo PC -->
-	<section class="simple-container">
-		<div class="simple-card">
-			<h2>Jogos para PC</h2>
-			<p class="simple-sub">Confira os principais títulos disponíveis para PC!</p>
-			<div class="catalogo-grid">
-				<div class="catalogo-item">
-					<h3>Counter-Strike: Global Offensive</h3>
-					<img src="https://lh3.googleusercontent.com/proxy/QTj_E3u2w0iThPqkXmxVFufDvOTFtq6olvjRJHHKNU-xzLjKYYmeGq67bZUe7SNF-msPg4qdjhnQBeE8lDi4vaKN3C833oANLQIwbZ57DeOkOcczkAXk" alt="CS:GO" class="game-cover">
-					<p>Tiro/Estratégia</p>
-					<span class="preco">R$ 49,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
-				</div>
-				<div class="catalogo-item">
-					<h3>The Sims 4</h3>
-					<img src="https://m.media-amazon.com/images/I/71otyq1xFNL.jpg" alt="The Sims 4" class="game-cover">
-					<p>Simulação</p>
-					<span class="preco">R$ 89,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
-				</div>
-				<div class="catalogo-item">
-					<h3>League of Legends</h3>
-					<img src="https://pt.egw.news/_next/image?url=https%3A%2F%2Fegw.news%2Fuploads%2Fnews%2F1%2F17%2F1739981305866_1739981305866.webp&w=1920&q=75" alt="League of Legends" class="game-cover">
-					<p>MOBA</p>
-					<span class="preco">Gratuito</span>
-					<button class="btn">Adicionar ao Carrinho</button>
-				</div>
-				<div class="catalogo-item">
-					<h3>Minecraft</h3>
-					<img src="https://upload.wikimedia.org/wikipedia/pt/9/9c/Minecraft_capa.png" alt="Minecraft" class="game-cover">
-					<p>Aventura/Construção</p>
-					<span class="preco">R$ 99,90</span>
-					<button class="btn">Adicionar ao Carrinho</button>
+	<section class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-10">
+				<div class="card shadow-lg rounded-4 p-4 bg-dark text-light">
+					<h2 class="mb-3 text-center">Jogos para PC</h2>
+					<p class="mb-4 text-center text-secondary">Confira os principais títulos disponíveis para PC!</p>
+					<div class="row g-4">
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>Counter-Strike: Global Offensive</h3>
+								<img src="https://lh3.googleusercontent.com/proxy/QTj_E3u2w0iThPqkXmxVFufDvOTFtq6olvjRJHHKNU-xzLjKYYmeGq67bZUe7SNF-msPg4qdjhnQBeE8lDi4vaKN3C833oANLQIwbZ57DeOkOcczkAXk" alt="CS:GO" class="game-cover mb-2">
+								<p>Tiro/Estratégia</p>
+								<span class="preco">R$ 49,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>The Sims 4</h3>
+								<img src="https://m.media-amazon.com/images/I/71otyq1xFNL.jpg" alt="The Sims 4" class="game-cover mb-2">
+								<p>Simulação</p>
+								<span class="preco">R$ 89,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>League of Legends</h3>
+								<img src="https://pt.egw.news/_next/image?url=https%3A%2F%2Fegw.news%2Fuploads%2Fnews%2F1%2F17%2F1739981305866_1739981305866.webp&w=1920&q=75" alt="League of Legends" class="game-cover mb-2">
+								<p>MOBA</p>
+								<span class="preco">Gratuito</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+							<div class="catalogo-item text-center">
+								<h3>Minecraft</h3>
+								<img src="https://upload.wikimedia.org/wikipedia/pt/9/9c/Minecraft_capa.png" alt="Minecraft" class="game-cover mb-2">
+								<p>Aventura/Construção</p>
+								<span class="preco">R$ 99,90</span>
+								<button class="btn btn-primary w-100 mt-2">Adicionar ao Carrinho</button>
+							</div>
+						</div>
+					</div>
+					<p class="mt-4 text-center">
+						<a href="index.html" class="link-info">Voltar para Home</a>
+					</p>
 				</div>
 			</div>
-			<p class="simple-footer">
-				<a href="index.html">Voltar para Home</a>
-			</p>
 		</div>
 	</section>
 
@@ -76,7 +96,7 @@
 		<div class="container footer-inner">
 			<div>
 				<h4>Mundo dos Games</h4>
-				<p>Rua Exemplo, 123 — Cidade — Brasil</p>
+				<p>Rua dos Games, 123 — Cidade — Brasil</p>
 			</div>
 			<div>
 				<h4>Links</h4>
@@ -94,6 +114,7 @@
 		</div>
 	</footer>
 
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="script.js"></script>
 </body>
 </html>
