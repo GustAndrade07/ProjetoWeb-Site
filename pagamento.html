@@ -82,7 +82,8 @@
 					  <p>Total da compra: <span id="cart-total">R$ 0,00</span></p>
 				</div>
 
-				<button type="submit" class="btn">Confirmar Pagamento</button>
+				<a href="confirmar.html" class="btn">Confirmar Pagamento</a>
+
 			</form>
 			<p class="simple-footer">
 				<a href="checkout.html">Voltar ao checkout</a>
@@ -122,52 +123,6 @@
 				document.getElementById('cep').value = usuario.cep || '';
 				document.getElementById('endereco').value = usuario.endereco || '';
 			}
-
-			// Exibe campos conforme método de pagamento e valida submit
-
-			document.addEventListener('DOMContentLoaded', function() {
-    const select = document.getElementById('forma-pagamento');
-    const dadosCartao = document.getElementById('dados-cartao');
-    const infoPix = document.getElementById('info-pix');
-    const infoBoleto = document.getElementById('info-boleto');
-    const form = document.getElementById('form-pagamento');
-    const camposCartao = [
-      document.getElementById('numero-cartao'),
-      document.getElementById('nome-cartao'),
-      document.getElementById('validade-cartao'),
-      document.getElementById('cvv-cartao')
-    ];
-    function atualizarCamposPagamento() {
-        if (select.value === 'cartao') {
-            dadosCartao.style.display = 'block';
-            infoPix.style.display = 'none';
-            infoBoleto.style.display = 'none';
-            camposCartao.forEach(campo => campo.setAttribute('required', 'required'));
-        } else {
-            dadosCartao.style.display = 'none';
-            infoPix.style.display = select.value === 'pix' ? 'block' : 'none';
-            infoBoleto.style.display = select.value === 'boleto' ? 'block' : 'none';
-            camposCartao.forEach(campo => campo.removeAttribute('required'));
-        }
-    }
-    select.addEventListener('change', atualizarCamposPagamento);
-    atualizarCamposPagamento(); // inicializa
-
-    form.addEventListener('submit', function(e) {
-      let erro = false;
-      if (select.value === 'cartao') {
-        let vazio = camposCartao.some(campo => !campo.value.trim());
-        if (vazio) {
-          erro = true;
-          alert('Preencha todos os campos do cartão para confirmar o pagamento.');
-        }
-      }
-      e.preventDefault();
-      if (!erro) {
-        window.location.href = 'confirmar.html';
-      }
-    });
-});
 		</script>
 </body>
 </html>

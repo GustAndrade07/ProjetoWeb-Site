@@ -113,14 +113,17 @@ document.addEventListener('DOMContentLoaded', atualizarContadorCarrinho);
 if (document.getElementById('cart-items')) {
 	const usuario = getUsuarioLogado();
 	let carrinho = [];
-	if (usuario && usuario.email) {
-		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	if (!usuario || !usuario.email) {
+		document.getElementById('cart-items').innerHTML = '<p>Faça login para visualizar seu carrinho.</p>';
+		document.getElementById('cart-total').textContent = '0.00';
+		return;
 	}
+	carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
 	const cartItems = document.getElementById('cart-items');
 	function renderCarrinho() {
 		cartItems.innerHTML = '';
 		let total = 0;
-		if (carrinho.length === 0) {
+		if (!Array.isArray(carrinho) || carrinho.length === 0) {
 			cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
 		} else {
 			carrinho.forEach((item, idx) => {
@@ -135,7 +138,7 @@ if (document.getElementById('cart-items')) {
 					<button class="cart-remove" data-idx="${idx}">Remover</button>
 				`;
 				cartItems.appendChild(div);
-				total += item.preco * (item.qtd || 1);
+				total += (parseFloat(item.preco) || 0) * (parseInt(item.qtd) || 1);
 			});
 		}
 		document.getElementById('cart-total').textContent = total.toFixed(2);
@@ -146,9 +149,7 @@ if (document.getElementById('cart-items')) {
 		const idx = parseInt(e.target.getAttribute('data-idx'));
 		if (e.target.classList.contains('cart-remove')) {
 			carrinho.splice(idx, 1);
-			if (usuario && usuario.email) {
-				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
-			}
+			localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
 			renderCarrinho();
 		}
 		if (e.target.classList.contains('cart-btn')) {
@@ -156,9 +157,7 @@ if (document.getElementById('cart-items')) {
 			if (e.target.getAttribute('data-action') === 'inc') qtd++;
 			if (e.target.getAttribute('data-action') === 'dec' && qtd > 1) qtd--;
 			carrinho[idx].qtd = qtd;
-			if (usuario && usuario.email) {
-				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
-			}
+			localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
 			renderCarrinho();
 		}
 	});
@@ -168,9 +167,7 @@ if (document.getElementById('cart-items')) {
 			let qtd = parseInt(e.target.value);
 			if (isNaN(qtd) || qtd < 1) qtd = 1;
 			carrinho[idx].qtd = qtd;
-			if (usuario && usuario.email) {
-				localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
-			}
+			localStorage.setItem('carrinho_' + usuario.email, JSON.stringify(carrinho));
 			renderCarrinho();
 		}
 	});
@@ -180,18 +177,26 @@ if (document.getElementById('cart-items')) {
 if (document.getElementById('checkout-items')) {
 	const usuario = getUsuarioLogado();
 	let carrinho = [];
-	if (usuario && usuario.email) {
-		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	if (!usuario || !usuario.email) {
+		document.getElementById('checkout-items').innerHTML = '<p>Faça login para visualizar o resumo do pedido.</p>';
+		document.getElementById('checkout-subtotal').textContent = '0.00';
+		document.getElementById('checkout-total').textContent = '0.00';
+		return;
 	}
+	carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
 	const checkoutItems = document.getElementById('checkout-items');
 	let subtotal = 0;
-	carrinho.forEach(item => {
-		const div = document.createElement('div');
-		div.className = 'checkout-item';
-		div.innerHTML = `<strong>${item.nome}</strong> — R$ ${item.preco.toFixed(2)} x ${item.qtd || 1}`;
-		checkoutItems.appendChild(div);
-		subtotal += item.preco * (item.qtd || 1);
-	});
+	if (!Array.isArray(carrinho) || carrinho.length === 0) {
+		checkoutItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+	} else {
+		carrinho.forEach(item => {
+			const div = document.createElement('div');
+			div.className = 'checkout-item';
+			div.innerHTML = `<strong>${item.nome}</strong> — R$ ${parseFloat(item.preco).toFixed(2)} x ${parseInt(item.qtd) || 1}`;
+			checkoutItems.appendChild(div);
+			subtotal += (parseFloat(item.preco) || 0) * (parseInt(item.qtd) || 1);
+		});
+	}
 	document.getElementById('checkout-subtotal').textContent = subtotal.toFixed(2);
 	document.getElementById('checkout-total').textContent = subtotal.toFixed(2);
 	if (usuario) {
@@ -203,18 +208,25 @@ if (document.getElementById('checkout-items')) {
 if (document.getElementById('confirm-items')) {
 	const usuario = getUsuarioLogado();
 	let carrinho = [];
-	if (usuario && usuario.email) {
-		carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
+	if (!usuario || !usuario.email) {
+		document.getElementById('confirm-items').innerHTML = '<p>Faça login para visualizar a confirmação do pedido.</p>';
+		document.getElementById('confirm-total').textContent = '0.00';
+		return;
 	}
+	carrinho = JSON.parse(localStorage.getItem('carrinho_' + usuario.email) || '[]');
 	const confirmItems = document.getElementById('confirm-items');
 	let total = 0;
-	carrinho.forEach(item => {
-		const div = document.createElement('div');
-		div.className = 'confirm-item';
-		div.innerHTML = `<strong>${item.nome}</strong> — R$ ${item.preco.toFixed(2)} x ${item.qtd || 1}`;
-		confirmItems.appendChild(div);
-		total += item.preco * (item.qtd || 1);
-	});
+	if (!Array.isArray(carrinho) || carrinho.length === 0) {
+		confirmItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+	} else {
+		carrinho.forEach(item => {
+			const div = document.createElement('div');
+			div.className = 'confirm-item';
+			div.innerHTML = `<strong>${item.nome}</strong> — R$ ${parseFloat(item.preco).toFixed(2)} x ${parseInt(item.qtd) || 1}`;
+			confirmItems.appendChild(div);
+			total += (parseFloat(item.preco) || 0) * (parseInt(item.qtd) || 1);
+		});
+	}
 	document.getElementById('confirm-total').textContent = total.toFixed(2);
 }
 
